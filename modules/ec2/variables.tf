@@ -4,9 +4,9 @@ variable "count"                  {default=1}
 variable "instance_type"          {}
 variable "ami_id"                 {}
 variable "key_name"               {}
-variable "subnet_id"              {}
+variable "subnet_id"              {default=""}
 variable "iam_instance_profile"   {default=""}
-variable "disk_size"              {}
+variable "volume_size"            {default="8"}
 variable "instance_name"          {}
 variable "vpc_id"                 {default=""}
 variable "allow_inbound_sgs"      {type="list", default=[]}
