@@ -19,18 +19,18 @@ resource "aws_internet_gateway" "main-ig" {
 }
 
 resource "aws_nat_gateway" "nat-gateway" {
-    allocation_id                     = "eipalloc-6ad06d0d"
+    allocation_id                     = "${aws_eip.nat-eip.id}"
     subnet_id                         = "${element(aws_subnet.public-subnet-alb.*.id, count.index)}"
-    depends_on                        = ["aws_internet_gateway.main-ig"]
+    depends_on                        = ["aws_internet_gateway.main-ig", "aws_eip.nat-eip"]
 }
 
 resource "aws_egress_only_internet_gateway" "egress-gateway" {
   vpc_id                              = "${aws_vpc.main.id}"
 }
 
-#resource "aws_eip" "nat-eip" {
-#    vpc= true
-#}
+resource "aws_eip" "nat-eip" {
+    vpc= true
+}
 
 ##############Subnet in each availablity zone for EC2 instances.###############
 resource "aws_subnet" "private-subnet-ec2" {
@@ -88,10 +88,7 @@ resource "aws_subnet" "private-subnet-rds" {
 
 resource "aws_route_table" "rds-rt" {
     vpc_id                            = "${aws_vpc.main.id}"
-    route {
-      cidr_block                      = "0.0.0.0/0"
-      gateway_id                      = "${aws_internet_gateway.main-ig.id}"
-    }
+
     tags {
       Name                            = "${var.vpc_name}-rds-route-table"
       "managed-by"                    = "terraform"
@@ -140,4 +137,21 @@ resource "aws_route_table_association" "alb-rt-association" {
     count                             = "${length(var.azs[var.region])}"
     subnet_id                         = "${element(aws_subnet.public-subnet-alb.*.id, count.index)}"
     route_table_id                    = "${element(aws_route_table.alb-rt.*.id, count.index)}"
+}
+
+
+##############Subnet in each availablity zone for Redis cache instances.########
+resource "aws_subnet" "private-subnet-elasticache" {
+    vpc_id                            = "${aws_vpc.main.id}"
+    count                             = "${length(var.azs[var.region])}"
+    cidr_block                        = "${cidrsubnet(var.vpc_cidr_block, 8, count.index + 9)}"
+    availability_zone                 = "${element(var.azs[var.region], count.index)}"
+    map_public_ip_on_launch           = false
+    ipv6_cidr_block                   = "${cidrsubnet(aws_vpc.main.ipv6_cidr_block, 8, count.index  + 9)}"
+    assign_ipv6_address_on_creation   = true
+
+    tags {
+        "Name"                        = "${var.vpc_name}-elasticache-subnet-${element(var.azs[var.region],count.index)}"
+        "managed-by"                  = "terraform"
+    }
 }

@@ -17,18 +17,13 @@ resource "aws_autoscaling_group" "asg" {
   max_size             = "${var.max_size}"
   vpc_zone_identifier  = ["${var.vpc_zone_identifier}"]
   target_group_arns    = ["${var.target_group_arns}"]
-  tags = [
-    {
-      key                 = "Name"
-      value               = "${var.asg_name}-(autoscaled)"
-      propagate_at_launch = true
-    },
-    {
-      key                 = "managed-by"
-      value               = "terraform"
-      propagate_at_launch = true
-    }
-  ]
+  tags = ["${concat(
+    list(
+      map("key", "Name", "value", "${var.asg_name}-(autoscaled)", "propagate_at_launch", true),
+      map("key", "managed-by", "value", "terraform", "propagate_at_launch", true)
+    ),
+    var.additional_tags)
+  }"]
   lifecycle {
     create_before_destroy = true
   }

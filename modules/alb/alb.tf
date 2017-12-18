@@ -1,8 +1,23 @@
 
-######### ALB Security Group ##################################################
+######### ALB Security Group ###################################################
 resource "aws_security_group" "alb-sg" {
     name                        = "${var.alb_name}-sg"
     vpc_id                      = "${var.vpc_id}"
+/*
+    ingress {
+      from_port                 = 80
+      to_port                   = 80
+      protocol                  = "tcp"
+      cidr_blocks               = ["0.0.0.0/0"]
+    }
+
+    ingress {
+      from_port                 = 80
+      to_port                   = 80
+      protocol                  = "tcp"
+      ipv6_cidr_blocks          = ["::/0"]
+    }
+*/
     ingress {
       from_port                 = 443
       to_port                   = 443
@@ -17,7 +32,7 @@ resource "aws_security_group" "alb-sg" {
       ipv6_cidr_blocks          = ["::/0"]
     }
 
-    #################### outbound internet access from anywhere    ############
+    #################### outbound internet access from anywhere  ###############
     egress {
       from_port                 = 0
       to_port                   = 0
@@ -38,41 +53,53 @@ resource "aws_security_group" "alb-sg" {
    }
 }
 
-##################################  ALB Target group  ##########################
+##################################  ALB Target groups  ##########################
 resource "aws_alb_target_group" "alb-tg" {
-    name                        = "${var.alb_name}-tg"
-    port                        = "${var.target_port}"
+    count                       = "${length(var.targets)}"
+    name                        = "${ trimspace( element( split(",", var.targets[count.index]), 0 ) ) }"
+    port                        = "${ trimspace( element( split(",", var.targets[count.index]), 1 ) ) }"
     protocol                    = "HTTP"
+    deregistration_delay        = 10
     vpc_id                      = "${var.vpc_id}"
-        health_check {
+    health_check {
         healthy_threshold       = 2
         unhealthy_threshold     = 2
         timeout                 = 5
-        path                    = "/"
+        path                    = "${ trimspace(element( split(",", var.targets[count.index]), 2 ) ) }"
         interval                = 10
-        }
-      tags {
-      "Name"                    = "${var.alb_name}-tg"
-      "managed-by"              = "terraform"
-     }
-
- }
-
-
-############################## Listner for ALB      ############################
- resource "aws_alb_listener" "alb-listener" {
-   load_balancer_arn          = "${aws_alb.alb.arn}"
-   port                       = "443"
-   protocol                   = "HTTPS"
-   certificate_arn            = "${var.certificate_arn}"
-
-        default_action {
-        target_group_arn      = "${aws_alb_target_group.alb-tg.arn}"
-        type                  = "forward"
     }
- }
+    tags {
+      "Name"                    = "${ trimspace( element( split(",", var.targets[count.index]), 0 ) ) }"
+      "managed-by"              = "terraform"
+    }
+}
 
- resource "aws_alb" "alb" {
+############################## HTTP Listner for ALB      #######################
+/*
+resource "aws_alb_listener" "alb-http-listener" {
+  load_balancer_arn             = "${aws_alb.alb.arn}"
+  port                          = "80"
+  protocol                      = "HTTP"
+  default_action {
+       target_group_arn         = "${aws_alb_target_group.alb-tg.0.id}"
+       type                     = "forward"
+  }
+}
+*/
+
+############################## HTTPS Listner for ALB      ######################
+resource "aws_alb_listener" "alb-https-listener" {
+  load_balancer_arn          = "${aws_alb.alb.arn}"
+  port                       = "443"
+  protocol                   = "HTTPS"
+  certificate_arn            = "${var.certificate_arn}"
+  default_action {
+      target_group_arn      = "${aws_alb_target_group.alb-tg.0.arn}"
+      type                  = "forward"
+  }
+}
+
+resource "aws_alb" "alb" {
     name                      = "${var.alb_name}"
     internal                  = false
     subnets                   = ["${var.alb_subnet_ids}"]
@@ -81,6 +108,6 @@ resource "aws_alb_target_group" "alb-tg" {
     ip_address_type           = "${var.ip_address_type}"
     tags {
       "Name"                  = "${var.alb_name}-tg"
-      "managed-by"            = "terraform"      
+      "managed-by"            = "terraform"
    }
 }
