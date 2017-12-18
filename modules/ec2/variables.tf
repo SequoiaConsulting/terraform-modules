@@ -3,7 +3,7 @@
 variable "count"                  {}
 variable "instance_type"          {}
 variable "ami_id"                 {}
-variable "key_name"            {}
+variable "key_name"               {}
 variable "subnet_id"              {}
 variable "iam_instance_profile"   {default=""}
 variable "disk_size"              {}
