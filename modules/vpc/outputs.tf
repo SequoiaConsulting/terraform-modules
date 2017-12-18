@@ -6,6 +6,10 @@ output "ec2-subnets" {
     value = "${aws_subnet.private-subnet-ec2.*.id}"
 }
 
+output "elasticache-subnets" {
+    value = "${aws_subnet.private-subnet-elasticache.*.id}"
+}
+
 output "rds-subnets" {
     value = "${aws_subnet.private-subnet-rds.*.id}"
 }

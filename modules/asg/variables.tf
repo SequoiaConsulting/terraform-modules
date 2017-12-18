@@ -9,3 +9,13 @@ variable "max_size"             {}
 variable "vpc_zone_identifier"  {type = "list"}
 variable "target_group_arns"    {type = "list"}
 variable "sns_topic_arn"        {}
+variable "additional_tags" {
+  type = "list"
+  default = [
+    {
+      key = "managed-by"
+      value = "terraform"
+      propagate_at_launch = true
+    }
+  ]
+}
