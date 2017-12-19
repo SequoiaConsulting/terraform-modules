@@ -1,1 +1,0 @@
-{"Modules":[{"Source":"git::ssh://git@bitbucket.org/ymedialabs/terraform-modules.git//modules//ec2?ref=dev","Key":"1.my-ec2;git::ssh://git@bitbucket.org/ymedialabs/terraform-modules.git//modules//ec2?ref=dev","Version":"","Dir":".terraform/modules/5b4cdebd9d6fa23d36982321da0c65e6","Root":"modules/ec2"}]}
