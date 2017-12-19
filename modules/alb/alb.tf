@@ -106,8 +106,9 @@ resource "aws_alb" "alb" {
     security_groups           = ["${aws_security_group.alb-sg.id}"]
     enable_deletion_protection= false
     ip_address_type           = "${var.ip_address_type}"
-    tags {
-      "Name"                  = "${var.alb_name}-tg"
-      "managed-by"            = "terraform"
-   }
+    tags = "${merge(var.additional_tags, map(
+     "Name", "${var.alb_name}",
+     "managed-by", "terraform"
+    ))}"
+
 }
