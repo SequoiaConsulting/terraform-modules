@@ -8,7 +8,7 @@ module "my-ec2" {
 
   additional_tags {
   company = "yml"
-  for = "Prashant, Guru"
-  project = "adobe-aem-poc"
+  for = "Nobody"
+  project = "test"
 }
 }
