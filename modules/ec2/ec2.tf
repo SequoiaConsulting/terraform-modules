@@ -10,7 +10,7 @@ resource "aws_instance" "ec2-instance"{
    iam_instance_profile               = "${var.iam_instance_profile}"
 
    root_block_device {
-      volume_size                     = "${var.disk_size}"
+      volume_size                     = "${var.volume_size}"
    }
 
    tags = "${merge(var.additional_tags, map(
