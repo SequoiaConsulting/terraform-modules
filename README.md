@@ -1,4 +1,4 @@
-#Terraform project for Sequoia.
+#Terraform modules
 
 Consists of modules for:
  * VPC setup
