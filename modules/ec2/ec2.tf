@@ -8,6 +8,7 @@ resource "aws_instance" "ec2-instance"{
    vpc_security_group_ids             = ["${aws_security_group.ec2-instance-sg.id}"]
    subnet_id                          = "${var.subnet_id}"
    iam_instance_profile               = "${var.iam_instance_profile}"
+   user_data                          = "${var.user_data}"
 
    root_block_device {
       volume_size                     = "${var.volume_size}"

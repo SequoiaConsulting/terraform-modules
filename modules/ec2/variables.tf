@@ -12,6 +12,7 @@ variable "vpc_id"                 {}
 variable "allow_inbound_sgs"      {type="list", default=[]}
 variable "inbound_sgs_count"      {default=0}
 variable "allow_inbound_ips"      {type="list", default=[]}
+variable "user_data"              {default=""}
 variable "additional_tags" {
   type = "map"
   default = {}
