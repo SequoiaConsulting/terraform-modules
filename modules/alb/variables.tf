@@ -5,3 +5,4 @@ variable "vpc_id"           {}
 variable "targets"          {type = "list"}
 variable "certificate_arn"  {}
 variable "ip_address_type"  {}
+variable "additional_tags"  {type = "map" default = {}}
