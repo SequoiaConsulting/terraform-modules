@@ -17,3 +17,4 @@ variable "additional_tags" {
   type = "map"
   default = {}
 }
+variable "additional_sgs"      {type="list", default=[]}

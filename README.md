@@ -6,3 +6,6 @@ Consists of modules for:
  * RDS instances coupled with it's security group.
  * ALB (Application load balancer coupled with it's security group)
  * ASG (Auto scaling groups coupled with launch configs)
+
+Updates:
+v0.35 : Included option to associate additional security group for EC2 instances through additional_sgs parameter.
