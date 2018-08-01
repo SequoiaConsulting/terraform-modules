@@ -4,20 +4,6 @@ resource "aws_security_group" "alb-sg" {
     name                        = "${var.alb_name}-sg"
     vpc_id                      = "${var.vpc_id}"
 
-    ingress {
-      from_port                 = 443
-      to_port                   = 443
-      protocol                  = "tcp"
-      cidr_blocks               = ["0.0.0.0/0"]
-    }
-
-    ingress {
-      from_port                 = 443
-      to_port                   = 443
-      protocol                  = "tcp"
-      ipv6_cidr_blocks          = ["::/0"]
-    }
-
     #################### outbound internet access from anywhere  ###############
     egress {
       from_port                 = 0
@@ -39,6 +25,23 @@ resource "aws_security_group" "alb-sg" {
    }
 }
 
+resource "aws_security_group_rule" "allow_https_ipv4" {
+  type            = "ingress"
+  from_port       = 443
+  to_port         = 443
+  protocol        = "tcp"
+  cidr_blocks     = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.alb-sg.id}"
+}
+
+resource "aws_security_group_rule" "allow_https_ipv6" {
+  type            = "ingress"
+  from_port       = 443
+  to_port         = 443
+  protocol        = "tcp"
+  ipv6_cidr_blocks= ["::/0"]
+  security_group_id = "${aws_security_group.alb-sg.id}"
+}
 
 resource "aws_security_group_rule" "allow_http_ipv4" {
   count = "${var.allow_http}"
