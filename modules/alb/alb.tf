@@ -3,21 +3,7 @@
 resource "aws_security_group" "alb-sg" {
     name                        = "${var.alb_name}-sg"
     vpc_id                      = "${var.vpc_id}"
-/*
-    ingress {
-      from_port                 = 80
-      to_port                   = 80
-      protocol                  = "tcp"
-      cidr_blocks               = ["0.0.0.0/0"]
-    }
 
-    ingress {
-      from_port                 = 80
-      to_port                   = 80
-      protocol                  = "tcp"
-      ipv6_cidr_blocks          = ["::/0"]
-    }
-*/
     ingress {
       from_port                 = 443
       to_port                   = 443
@@ -51,6 +37,31 @@ resource "aws_security_group" "alb-sg" {
       "Name"                    = "${var.alb_name}-sg"
       "managed-by"              = "terraform"
    }
+}
+
+resource "aws_eip" "example" {
+
+  instance = "${aws_instance.example.id}"
+}
+
+resource "aws_security_group_rule" "allow_http_ipv4" {
+  count = "${var.allow_http}"
+  type            = "ingress"
+  from_port       = 80
+  to_port         = 80
+  protocol        = "tcp"
+  cidr_blocks     = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.alb-sg.id}"
+}
+
+resource "aws_security_group_rule" "allow_http_ipv6" {
+  count = "${var.allow_http}"
+  type            = "ingress"
+  from_port       = 80
+  to_port         = 80
+  protocol        = "tcp"
+  ipv6_cidr_blocks= ["::/0"]
+  security_group_id = "${aws_security_group.alb-sg.id}"
 }
 
 ##################################  ALB Target groups  ##########################
