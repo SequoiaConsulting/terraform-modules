@@ -39,10 +39,6 @@ resource "aws_security_group" "alb-sg" {
    }
 }
 
-resource "aws_eip" "example" {
-
-  instance = "${aws_instance.example.id}"
-}
 
 resource "aws_security_group_rule" "allow_http_ipv4" {
   count = "${var.allow_http}"
