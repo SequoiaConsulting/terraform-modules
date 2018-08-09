@@ -7,3 +7,4 @@ variable "certificate_arn"  {}
 variable "ip_address_type"  {}
 variable "additional_tags"  {type = "map" default = {}}
 variable "allow_http"       {default="0"}
+variable "ssl_policy"       {default="ELBSecurityPolicy-TLS-1-2-Ext-2018-06"}
