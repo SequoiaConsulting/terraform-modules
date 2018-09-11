@@ -42,7 +42,7 @@ module "staging_asg"{
 | max_size |  The maximum size of the auto scaling group | string | - | yes |
 | vpc_zone_identifier | The list of the subnet ID's in which instances will create | list | - | yes |
 | target_group_arns | The ARN of the Target group | list | - | yes |
-| sns_topic_arn | The ARN of the SNS topic | String | - | yes |
+| sns_topic_arn | The ARN of the SNS topic | string | - | yes |
 | additional_tags | Additional tags of ASG | list | key = "managed-by", value = "terraform", propagate_at_launch = true | no |
 
 
