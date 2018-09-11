@@ -7,7 +7,7 @@ Terraform module which creates ALB resources on AWS.
 ```hcl
 module "Demo-backend-dev-alb"
 {
-    source = "git@github.com:sharath-yml/terraform-modules.git//modules//alb?ref=v0.35"
+    source = "git@github.com:sharath-yml/terraform-modules.git//modules//alb?ref=v0.39"
     alb_name                  = "demo-backend-dev-alb"
     vpc_id                    = "vpc-60191319"
     alb_subnet_ids            = ["subnet-2ac2ae53", "subnet-5eaa2315"]
