@@ -34,7 +34,7 @@ module "demo-backend-dev-ec2" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| count |  | string | 1 | no |
+| count | The number of EC2 instances to be created | string | 1 | no |
 | instance_type | The type of the instance to be created | string | - | yes |
 | ami_id | AMI ID of the instance | string | - | yes |
 | key_name | Key of the instance | string | - | yes |
