@@ -16,6 +16,8 @@ module "Demo-backend-dev-alb"
     targets = ["backend-dev, 7300,  /health", "backend-integration-tg, 8300, /health"]
 }
 
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
