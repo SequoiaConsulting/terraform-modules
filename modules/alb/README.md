@@ -15,3 +15,8 @@ module "Demo-backend-dev-alb"
     ip_address_type           = "dualstack"
     targets = ["backend-dev, 7300,  /health", "backend-integration-tg, 8300, /health"]
 }
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
