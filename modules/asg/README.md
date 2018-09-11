@@ -11,7 +11,7 @@ module "staging_asg"{
       image_id = "ami-db710fa3"
       instance_type = "t2.medium"
       iam_instance_profile = "${aws_iam_instance_profile.staging-instance-profile.name}"
-      security_groups = ["${aws_security_group.people-backend-staging-ec2.id}"]
+      security_groups = ["${aws_security_group.backend-staging-ec2.id}"]
       key_name = "demo-dev"
       min_size = 1
       max_size = 4
