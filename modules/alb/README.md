@@ -28,7 +28,7 @@ module "Demo-backend-dev-alb"
 | certificate_arn |  To use an HTTPS listener, the ARN of an SSL certificate is required | string | - | yes |
 | ip_address_type |  The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack. | string | - | yes |
 | additional_tags |  Additional tags for the application load balancer | map | [ ] | no |
-| allow_http | Allow http access from ipv6  | string | 0 | no |
+| allow_http | Allow HTTP access (from both IPv4 & IPv6)  | string | 0 | no |
 | ssl_policy | The security policy if using HTTPS externally on the load balancer. [See](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-policy-table.html). | string | `ELBSecurityPolicy-2016-08` | no |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
