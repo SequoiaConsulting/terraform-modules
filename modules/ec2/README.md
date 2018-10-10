@@ -39,7 +39,7 @@ module "demo-backend-dev-ec2" {
 | ami_id | AMI ID of the instance | string | - | yes |
 | key_name | Key of the instance | string | - | yes |
 | subnet_id |  Id of the subnet in which EC2 will be created | string | - | yes |
-| iam_instance_profile |  IAM instance profile name | string | "" | yes |
+| iam_instance_profile |  IAM instance profile name | string | "" | no |
 | volume_size | disk/EBS volume size | string | 8 | no |
 | instance_name | Name of the instance  | string | - | yes |
 | vpc_id | VPC ID | string | - | yes |
