@@ -24,7 +24,7 @@ module "Demo-backend-dev-alb"
 | alb_name | Name of the Application  Load Balancer | string | - | yes |
 | alb_subnet_ids | List of subnets . Minimum 2 subnets in different availabilty zones is required | list | - | yes |
 | vpc_id | VPC id where the load balancer and other resources will be deployed | string | - | yes |
-| targets | A list of maps containing key/value pairs that define the target groups to be created. Order of these maps is important and the index of these are to be referenced in listener definitions. Required key/values: name, backend_protocol,health_check_path | list | - | no |
+| targets | A list of maps containing key/value pairs that define the target groups to be created. Order of these maps is important and the index of these are to be referenced in listener definitions. Required key/values: name, backend_protocol,health_check_path | list | - | yes |
 | certificate_arn |  To use an HTTPS listener, the ARN of an SSL certificate is required | string | - | yes |
 | ip_address_type |  The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack. | string | - | yes |
 | additional_tags |  Additional tags for the application load balancer | map | [ ] | no |
