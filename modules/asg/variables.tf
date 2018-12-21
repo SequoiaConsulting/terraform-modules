@@ -19,3 +19,13 @@ variable "additional_tags" {
     }
   ]
 }
+variable "root_block_device" {
+  description = "Customize details about the root block device of the instance"
+  type        = "list"
+  default     = [
+    {
+      volume_size = "8"
+      volume_type = "gp2"
+    }
+  ]
+}
