@@ -41,6 +41,7 @@ module "demo-backend-dev-ec2" {
 | subnet_id |  Id of the subnet in which EC2 will be created | string | - | yes |
 | iam_instance_profile |  IAM instance profile name | string | "" | no |
 | volume_size | disk/EBS volume size | string | 8 | no |
+| volume_type | disk/EBS volume type | string | gp2 | no |
 | instance_name | Name of the instance  | string | - | yes |
 | vpc_id | VPC ID | string | - | yes |
 | allow_inbound_sgs | Security groups ID from which the instance is accessible.Input should be port no , security group ID | list | [ ] | no |
@@ -59,4 +60,3 @@ module "demo-backend-dev-ec2" {
 | instance_ids | The ID of the instance. |
 | security_groups | The Security group ID of the instance. |
 | public_ips | The Public IP of the instance. |
-

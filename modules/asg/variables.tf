@@ -24,7 +24,6 @@ variable "root_block_device" {
   type        = "list"
   default     = [
     {
-      volume_size = "8"
       volume_type = "gp2"
     }
   ]
