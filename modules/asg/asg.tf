@@ -4,6 +4,7 @@ resource "aws_launch_configuration" "lc" {
   instance_type               = "${var.instance_type}"
   iam_instance_profile        = "${var.iam_instance_profile}"
   security_groups             = ["${var.security_groups}"]
+  root_block_device           = "${var.root_block_device}"
   key_name                    = "${var.key_name}"
   lifecycle {
     create_before_destroy = true

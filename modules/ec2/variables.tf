@@ -7,6 +7,9 @@ variable "key_name"               {}
 variable "subnet_id"              {}
 variable "iam_instance_profile"   {default=""}
 variable "volume_size"            {default="8"}
+variable "volume_type" {
+  default = "gp2"
+}
 variable "instance_name"          {}
 variable "vpc_id"                 {}
 variable "allow_inbound_sgs"      {type="list", default=[]}

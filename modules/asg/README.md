@@ -37,6 +37,7 @@ module "staging_asg"{
 | instance_type | Type of the instances | string | - | yes |
 | iam_instance_profile | IAM Instance profile name | string | - | yes |
 | security_groups |  List of security groups to be attached | list | - | yes |
+| root_block_device |  Customize details about the root block device of the instance | list | volume_type = "gp2"| no |
 | key_name |  The key name that should be used for the instance | string | - | yes |
 | min_size |  The minimum size of the auto scaling group | string | - | yes |
 | max_size |  The maximum size of the auto scaling group | string | - | yes |
@@ -56,4 +57,3 @@ module "staging_asg"{
 
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
