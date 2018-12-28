@@ -117,6 +117,11 @@ resource "aws_alb" "alb" {
     security_groups           = ["${aws_security_group.alb-sg.id}"]
     enable_deletion_protection= false
     ip_address_type           = "${var.ip_address_type}"
+    access_logs {
+    bucket  = "${var.alb_access_logs_bucket}"
+    prefix  = "${var.alb_access_logs_prefix}"
+    enabled = "${var.alb_access_logs_bucket_enabled}"
+  }
     tags = "${merge(var.additional_tags, map(
      "Name", "${var.alb_name}",
      "managed-by", "terraform"
