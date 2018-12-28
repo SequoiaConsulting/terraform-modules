@@ -27,6 +27,9 @@ module "Demo-backend-dev-alb"
 | targets | A list of maps containing key/value pairs that define the target groups to be created. Order of these maps is important and the index of these are to be referenced in listener definitions. Required key/values: name, backend_protocol,health_check_path | list | - | yes |
 | certificate_arn |  To use an HTTPS listener, the ARN of an SSL certificate is required | string | - | yes |
 | ip_address_type |  The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack. | string | - | yes |
+| alb_access_logs_bucket |  S3 Bucket name to log the access details | string | "" | no |
+| alb_access_logs_prefix |  prefix of the access logs | string | "" | no |
+| alb_access_logs_bucket_enabled |  Boolean value to enable or disable access logs | string | false | no |
 | additional_tags |  Additional tags for the application load balancer | map | [ ] | no |
 | allow_http | Allow HTTP access (from both IPv4 & IPv6)  | string | 0 | no |
 | ssl_policy | The security policy if using HTTPS externally on the load balancer. [See](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-policy-table.html). | string | `ELBSecurityPolicy-2016-08` | no |
@@ -43,4 +46,3 @@ module "Demo-backend-dev-alb"
 | alb_dns_name | The DNS name of the load balancer. |
 | alb_zone_id | The Zone ID of the load balancer. |
 | alb_https_listener_arn | The Listener ARN of the load balancer. |
-
