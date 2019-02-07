@@ -18,6 +18,7 @@ resource "aws_autoscaling_group" "asg" {
   max_size             = "${var.max_size}"
   vpc_zone_identifier  = ["${var.vpc_zone_identifier}"]
   target_group_arns    = ["${var.target_group_arns}"]
+  health_check_type    = "${var.health_check_type}"
   tags = ["${concat(
     list(
       map("key", "Name", "value", "${var.asg_name}-(autoscaled)", "propagate_at_launch", true),

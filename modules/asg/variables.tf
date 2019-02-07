@@ -28,3 +28,6 @@ variable "root_block_device" {
     }
   ]
 }
+variable "health_check_type" {
+  default = "ELB"
+}
