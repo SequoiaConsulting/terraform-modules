@@ -41,6 +41,7 @@ module "staging_asg"{
 | key_name |  The key name that should be used for the instance | string | - | yes |
 | min_size |  The minimum size of the auto scaling group | string | - | yes |
 | max_size |  The maximum size of the auto scaling group | string | - | yes |
+| health_check_type |  The Helth Check Type of the auto scaling group is either EC2 ot ELB | string | ELB | no |
 | vpc_zone_identifier | The list of the subnet ID's in which instances will create | list | - | yes |
 | target_group_arns | The ARN of the Target group | list | - | yes |
 | sns_topic_arn | The ARN of the SNS topic | string | - | yes |
