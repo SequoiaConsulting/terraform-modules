@@ -97,7 +97,7 @@ resource "aws_autoscaling_notification" "asg-notification" {
   topic_arn = "${var.sns_topic_arn}"
 }
 
-resource "aws_cloudwatch_metric_alarm" "low-healthy-count" {
+resource "aws_cloudwatch_metric_alarm" "low-healthy-host-count" {
   alarm_name          = "${var.asg_name}-Low-HealthyHostCount"
   comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods  = "1"
