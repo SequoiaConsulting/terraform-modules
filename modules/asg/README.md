@@ -17,6 +17,8 @@ module "staging_asg"{
       max_size = 4
       vpc_zone_identifier = ["subnet-2ac2ae53","subnet-5eaa2315"]
       target_group_arns = ["${module.demo-backend-staging-alb.alb_tg_id[0]}"]
+      alb_arn_suffix    = ${module.demo-backend-staging-alb.alb_arn_suffix}
+      alb_tg_arn_suffix = ${module.demo-backend-staging-alb.alb_tg_arn_suffix[0]}
       sns_topic_arn = "arn:aws:sns:us-west-2:827014229206:demo-Backend-notification"
       additional_tags = [
             {
@@ -44,6 +46,8 @@ module "staging_asg"{
 | health_check_type |  The Health Check Type of the auto scaling group is either EC2 or ELB | string | ELB | no |
 | vpc_zone_identifier | The list of the subnet ID's in which instances will create | list | - | yes |
 | target_group_arns | The ARN of the Target group | list | - | yes |
+| alb_arn_suffix    | The ARN suffix of the ALB   | string| - | yes |
+| alb_tg_arn_suffix | The ARN suffix of the TargetGroup   | string| - | yes |
 | sns_topic_arn | The ARN of the SNS topic | string | - | yes |
 | additional_tags | Additional tags of ASG | list | key = "managed-by", value = "terraform", propagate_at_launch = true | no |
 
