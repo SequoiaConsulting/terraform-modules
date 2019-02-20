@@ -98,6 +98,7 @@ resource "aws_autoscaling_notification" "asg-notification" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "low-healthy-host-count" {
+  count               = "${var.allow_healthy_host_policy}"
   alarm_name          = "${var.asg_name}-Low-HealthyHostCount"
   comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods  = "1"
@@ -117,6 +118,7 @@ resource "aws_cloudwatch_metric_alarm" "low-healthy-host-count" {
 }
 
 resource "aws_autoscaling_policy" "HealthyHostCount-Scaling-Up-policy" {
+  count                  = "${var.allow_healthy_host_policy}"
   name                   = "${var.asg_name}-scale-up-HealthyHostCount"
   scaling_adjustment     = 1
   adjustment_type        = "ChangeInCapacity"
