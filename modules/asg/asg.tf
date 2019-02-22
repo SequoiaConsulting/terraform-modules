@@ -96,3 +96,32 @@ resource "aws_autoscaling_notification" "asg-notification" {
 
   topic_arn = "${var.sns_topic_arn}"
 }
+
+resource "aws_cloudwatch_metric_alarm" "low-healthy-host-count" {
+  count               = "${var.allow_healthy_host_policy}"
+  alarm_name          = "${var.asg_name}-Low-HealthyHostCount"
+  comparison_operator = "LessThanOrEqualToThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "HealthyHostCount"
+  namespace           = "AWS/ApplicationELB"
+  period              = "60"
+  statistic           = "Average"
+  threshold           = "${var.min_size - 1}"
+
+  dimensions {
+    LoadBalancer = "${var.alb_arn_suffix}"
+    TargetGroup  = "${var.alb_tg_arn_suffix}"
+}
+
+  alarm_description  = "Trigger an alert when target Group has low healthy hosts count"
+  alarm_actions      = ["${aws_autoscaling_policy.HealthyHostCount-Scaling-Up-policy.arn}"]
+}
+
+resource "aws_autoscaling_policy" "HealthyHostCount-Scaling-Up-policy" {
+  count                  = "${var.allow_healthy_host_policy}"
+  name                   = "${var.asg_name}-scale-up-HealthyHostCount"
+  scaling_adjustment     = 1
+  adjustment_type        = "ChangeInCapacity"
+  cooldown               = 300
+  autoscaling_group_name = "${aws_autoscaling_group.asg.name}"
+}

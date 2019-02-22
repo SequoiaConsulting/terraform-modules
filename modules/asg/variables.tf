@@ -31,3 +31,7 @@ variable "root_block_device" {
 variable "health_check_type" {
   default = "ELB"
 }
+
+variable "allow_healthy_host_policy" {
+  default = "0"
+}
