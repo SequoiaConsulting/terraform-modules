@@ -9,6 +9,12 @@ variable "max_size"             {}
 variable "vpc_zone_identifier"  {type = "list"}
 variable "target_group_arns"    {type = "list"}
 variable "sns_topic_arn"        {}
+variable "alb_arn_suffix" {
+  default = ""
+}
+variable "alb_tg_arn_suffix" {
+  default = ""
+}
 variable "additional_tags" {
   type = "list"
   default = [
