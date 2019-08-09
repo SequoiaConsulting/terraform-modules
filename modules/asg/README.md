@@ -6,7 +6,7 @@ Terraform module which creates ASG resources on AWS.
 
 ```hcl
 module "staging_asg"{
-      source = "git@github.com:sharath-yml/terraform-modules.git//modules//asg?ref=v0.39"
+      source = "git@github.com:sharath-sequoia/terraform-modules.git//modules//asg?ref=v0.39"
       asg_name = "demo-backend-staging"
       image_id = "ami-db710fa3"
       instance_type = "t2.medium"

@@ -6,7 +6,7 @@ Terraform module which creates EC2 resources on AWS.
 
 ```hcl
 module "demo-backend-dev-ec2" {
-  source = "git@github.com:sharath-yml/terraform-modules.git//modules//ec2?ref=v0.39"
+  source = "git@github.com:sharath-sequoia/terraform-modules.git//modules//ec2?ref=v0.39"
   subnet_id = "subnet-2ac2ae53"
   vpc_id = "vpc-60191319"
   instance_name         = "demo-backend-dev"
