@@ -26,12 +26,10 @@ output "alb_tg_arn_suffix" {
   value = aws_alb_target_group.alb-tg.*.arn_suffix
 }
 
-/*
 output "alb_http_listener_arn" {
-value = "${aws_alb_listener.alb-http-listener.arn}"
-}
-*/
-output "alb_https_listener_arn" {
-  value = aws_alb_listener.alb-https-listener.arn
+value = aws_alb_listener.alb-http-listener.*.arn
 }
 
+output "alb_https_listener_arn" {
+  value = aws_alb_listener.alb-https-listener.*.arn
+}
