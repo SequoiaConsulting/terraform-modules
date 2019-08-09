@@ -3,7 +3,7 @@ resource "aws_instance" "ec2-instance" {
   instance_type          = var.instance_type
   ami                    = var.ami_id
   key_name               = var.key_name
-  vpc_security_group_ids = [aws_security_group.ec2-instance-sg.id, var.additional_sgs]
+  vpc_security_group_ids = concat([aws_security_group.ec2-instance-sg.id], var.additional_sgs)
   subnet_id              = var.subnet_id
   iam_instance_profile   = var.iam_instance_profile
   user_data              = var.user_data
