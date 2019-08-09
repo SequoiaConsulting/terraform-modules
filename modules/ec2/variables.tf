@@ -1,9 +1,4 @@
 # ENVIRONMENT VARIABLES
-
-variable "count" {
-  default = 1
-}
-
 variable "instance_type" {
 }
 
@@ -61,4 +56,3 @@ variable "additional_sgs" {
   type    = list(string)
   default = []
 }
-

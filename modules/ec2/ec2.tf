@@ -1,6 +1,5 @@
 ##########################--EC2 Instance--####################################
 resource "aws_instance" "ec2-instance" {
-  count                  = var.count
   instance_type          = var.instance_type
   ami                    = var.ami_id
   key_name               = var.key_name
