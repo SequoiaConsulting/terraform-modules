@@ -34,10 +34,6 @@ variable "allow_inbound_sgs" {
   default = []
 }
 
-variable "inbound_sgs_count" {
-  default = 0
-}
-
 variable "allow_inbound_ips" {
   type    = list(string)
   default = []

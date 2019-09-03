@@ -15,7 +15,6 @@ module "demo-backend-dev-ec2" {
   key_name              = "demo-dev"
   allow_inbound_ips     = ["22, 0.0.0.0/0"]
   iam_instance_profile  = "${aws_iam_instance_profile.dev-instance-profile.name}"
-  inbound_sgs_count     = 2
   allow_inbound_sgs         = [ "7300, ${module.backend-dev-alb.alb_sg_id}",
                                 "8300, ${module.backend-dev-alb.alb_sg_id}"]
   volume_size           = 8
@@ -45,7 +44,6 @@ module "demo-backend-dev-ec2" {
 | instance_name | Name of the instance  | string | - | yes |
 | vpc_id | VPC ID | string | - | yes |
 | allow_inbound_sgs | Security groups ID from which the instance is accessible.Input should be port no , security group ID | list | [ ] | no |
-| inbound_sgs_count | Count of the security group in allow_inbound_sgs list | string | 0 | no |
 | allow_inbound_ips | List of whitelist IP's | list | [] | no |
 | user_data | Name of the file containing user data | string | "" | no |
 | additional_tags | Additional tags for the instance | map | { } | no |

@@ -23,7 +23,7 @@ resource "aws_instance" "ec2-instance" {
 }
 
 resource "aws_security_group_rule" "allow-inbound-sgs-rule" {
-  count                    = var.inbound_sgs_count
+  count                    = length(var.allow_inbound_sgs)
   type                     = "ingress"
   from_port                = element(split(",", var.allow_inbound_sgs[count.index]), 0)
   to_port                  = element(split(",", var.allow_inbound_sgs[count.index]), 0)
