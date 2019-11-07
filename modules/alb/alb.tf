@@ -7,6 +7,20 @@ resource "aws_security_group" "alb-sg" {
     "Name"       = "${var.alb_name}-sg"
     "managed-by" = "terraform"
   }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    ipv6_cidr_cidr_blocks = ["::/0"]
+  }
 }
 
 resource "aws_security_group_rule" "allow_https_ipv4" {
