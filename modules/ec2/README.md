@@ -18,7 +18,7 @@ module "demo-backend-dev-ec2" {
   allow_inbound_sgs         = [ "7300, ${module.backend-dev-alb.alb_sg_id}",
                                 "8300, ${module.backend-dev-alb.alb_sg_id}"]
   volume_size           = 8
-  additional_tags {
+  additional_tags = {
     for = "Chip"
     project = "demo-backend"
     demo-backend-dev = "v1"

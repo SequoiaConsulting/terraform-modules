@@ -5,8 +5,7 @@ Terraform module which creates ALB resources on AWS.
 ## Usage
 
 ```hcl
-module "Demo-backend-dev-alb"
-{
+module "Demo-backend-dev-alb" {
     source = "git@github.com:sharath-sequoia/terraform-modules.git//modules//alb?ref=v0.39"
     alb_name                  = "demo-backend-dev-alb"
     vpc_id                    = "vpc-60191319"
