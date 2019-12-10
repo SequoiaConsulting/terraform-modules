@@ -8,6 +8,30 @@ resource "aws_security_group" "alb-sg" {
     "managed-by" = "terraform"
   }
 
+  dynamic "ingress" {
+    iterator = ig
+    for_each = var.lb_ingress_ipv4
+    content {
+      from_port   = ig.value.from_port
+      to_port     = ig.value.to_port
+      protocol    = ig.value.protocol
+      cidr_blocks = ig.value.cidr_blocks
+      description = ig.value.description
+    }
+  }
+
+  dynamic "ingress" {
+    iterator = ig
+    for_each = var.lb_ingress_ipv6
+    content {
+      from_port        = ig.value.from_port
+      to_port          = ig.value.to_port
+      protocol         = ig.value.protocol
+      ipv6_cidr_blocks = ig.value.ipv6_cidr_blocks
+      description      = ig.value.description
+    }
+  }
+
   egress {
     from_port       = 0
     to_port         = 0

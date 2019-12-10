@@ -56,3 +56,25 @@ variable "alb_access_logs_bucket_enabled" {
   type = bool
   default = false
 }
+
+variable "lb_ingress_ipv4" {
+  type = list(object({
+    protocol = string
+    from_port = number
+    to_port = number
+    cidr_blocks = list(string)
+    description = string
+  }))
+  default = []
+}
+
+variable "lb_ingress_ipv6" {
+  type = list(object({
+    protocol = string
+    from_port = number
+    to_port = number
+    ipv6_cidr_blocks = list(string)
+    description = string
+  }))
+  default = []
+}
