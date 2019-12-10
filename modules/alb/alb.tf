@@ -110,7 +110,7 @@ resource "aws_alb_target_group" "alb-tg" {
 
 ############################## HTTP Listner for ALB      #######################
 resource "aws_alb_listener" "alb-http-listener" {
-  count = (var.allow_http == true ? 1 : 0)
+//  count = (var.allow_http == true ? 1 : 0)
   load_balancer_arn             = "${aws_alb.alb.arn}"
   port                          = "80"
   protocol                      = "HTTP"
@@ -122,7 +122,7 @@ resource "aws_alb_listener" "alb-http-listener" {
 
 ############################## HTTPS Listner for ALB      ######################
 resource "aws_alb_listener" "alb-https-listener" {
-  count = (var.allow_https == true ? 1 : 0)
+//  count = (var.allow_https == true ? 1 : 0)
   load_balancer_arn = aws_alb.alb.arn
   port              = "443"
   protocol          = "HTTPS"
