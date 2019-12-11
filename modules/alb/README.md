@@ -32,6 +32,8 @@ module "Demo-backend-dev-alb" {
 | additional_tags |  Additional tags for the application load balancer | map | [ ] | no |
 | allow_http | Allow HTTP access (from both IPv4 & IPv6)  | string | 0 | no |
 | allow_https | Allow HTTPS access (from both IPv4 & IPv6)  | string | true | no |
+| lb_ingress_ipv4 | Allow Inbound IPv4 CIDRs for HTTPS access | object | true | no |
+| lb_ingress_ipv6 | Allow Inbound IPv6 CIDRs for HTTPS access | object | true | no |
 | ssl_policy | The security policy if using HTTPS externally on the load balancer. [See](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-policy-table.html). | string | `ELBSecurityPolicy-2016-08` | no |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
