@@ -20,6 +20,10 @@ resource "aws_instance" "ec2-instance" {
       "managed-by" = "terraform"
     },
   )
+  metadata_options {
+    http_endpoint = "enabled"
+    http_tokens = "required"
+  }
 }
 
 resource "aws_security_group_rule" "allow-inbound-sgs-rule" {
